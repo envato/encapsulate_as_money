@@ -1,2 +1,2 @@
 # Include hook code here
-ActiveRecord::Base.send :include, EncapsulateAsMoney
+ActiveRecord::Base.send :extend, EncapsulateAsMoney
