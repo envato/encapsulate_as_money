@@ -24,10 +24,10 @@ describe EncapsulateAsMoney do
 
     context 'parse from string' do
       ['$10.00', '10.00', '$10', '10'].each do |pretty_string|
-        specify { expect(Money(pretty_string)).to eq Money(10_00) }
+        specify { expect(Money(pretty_string)).to eq Money.new(10_00) }
       end
 
-      specify { expect(Money('$10,000.00')).to eq Money(10000_00) }
+      specify { expect(Money('$10,000.00')).to eq Money.new(10000_00) }
     end
   end
 
