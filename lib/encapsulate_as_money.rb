@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'money'
+require 'active_support/all'
 
-def Money(cents)  
+def Money(cents)
   cents.is_a?(String) ? cents.gsub(',', '').to_money : Money.new(cents)
 end
 
@@ -12,30 +13,35 @@ class Money
   end
 end
 
-
 module EncapsulateAsMoney
-  
+
   def self.append_features(receiver)
-    
+
     receiver.instance_eval do
-      
+
       def encapsulate_as_money(*fields)
-        fields.each { |field| encapsualte_as_money!(field) }
+        options = fields.extract_options!
+        fields.each { |field| encapsulate_as_money!(field, options[:preserve_nil]) }
       end
-      
+
     private
-      
-      def encapsualte_as_money!(field)
+
+      def encapsulate_as_money!(field, preserve_nil)
         define_method field do
-          Money((super() or 0))
+          if preserve_nil
+            Money.new(super()) if super()
+          else
+            Money.new(super() || 0)
+          end
         end
+
         define_method "#{field}=" do |money|
-          super(money.cents)
+          super(money.try(:cents))
         end
       end
 
     end
 
   end
-  
+
 end
