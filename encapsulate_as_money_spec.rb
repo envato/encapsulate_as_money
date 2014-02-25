@@ -65,7 +65,7 @@ describe EncapsulateAsMoney do
 end
 
 describe EncapsulateAsMoney do
-  describe Money do
+  describe 'Money' do
     it 'creates a Money object without using `new` (?!?)' do
       expect(Money(1_00)).to eq Money.new(1_00)
     end
