@@ -3,7 +3,12 @@ require 'money'
 require 'active_support/core_ext/array/extract_options'
 
 def Money(cents)
-  cents.is_a?(String) ? cents.gsub(',', '').to_money : Money.new(cents)
+  if cents.is_a? String
+    warn "[DEPRECATION] Money(String) is deprecated. Please use Money.parse(String) instead. (#{Kernel.caller.first})"
+    Money.parse(cents.gsub(',', ''))
+  else
+    Money.new(cents)
+  end
 end
 
 class Money
