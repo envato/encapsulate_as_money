@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'money'
-require 'active_support/all'
+require 'active_support/core_ext/array/extract_options'
 
 def Money(cents)
   cents.is_a?(String) ? cents.gsub(',', '').to_money : Money.new(cents)
