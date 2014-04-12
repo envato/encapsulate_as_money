@@ -34,32 +34,26 @@ describe EncapsulateAsMoney do
   context 'dont preserve nil values' do
     let(:product) { nil_destroying_example.new }
 
-    it 'casts non zero integer values to a money instance' do
-      expect(product.nonzero_amount).to eq Money.new(1_00)
-    end
+    # it 'casts non zero integer values to a money instance' do
+    Then { product.nonzero_amount == Money.new(1_00) }
 
-    it 'casts zero integer values to a money instance' do
-      expect(product.zero_amount).to eq Money.new(0_00)
-    end
+    # it 'casts zero integer values to a money instance' do
+    Then { product.zero_amount == Money.new(0) }
 
-    it 'casts nil into a zero money instance' do
-      expect(product.nil_amount).to eq Money.new(0_00)
-    end
+    # it 'casts nil into a zero money instance' do
+    Then { product.nil_amount == Money.new(0) }
   end
 
   context 'preserve nil values' do
     let(:product) { nil_preserving_example.new }
 
-    it 'casts non zero integer values to a money instance' do
-      expect(product.nonzero_amount).to eq Money.new(1_00)
-    end
+    # it 'casts non zero integer values to a money instance' do
+    Then { product.nonzero_amount == Money.new(1_00) }
 
-    it 'casts zero integer values to a money instance' do
-      expect(product.zero_amount).to eq Money.new(0_00)
-    end
+    # it 'casts zero integer values to a money instance' do
+    Then { product.zero_amount == Money.new(0) }
 
-    it 'preserves nil' do
-      expect(product.nil_amount).to eq nil
-    end
+    # it 'preserves nil' do
+    Then { product.nil_amount == nil }
   end
 end

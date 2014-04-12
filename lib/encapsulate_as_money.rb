@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "encapsulate_as_money/version"
 require "money"
 
