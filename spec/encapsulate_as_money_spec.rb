@@ -2,58 +2,59 @@
 require "spec_helper"
 
 describe EncapsulateAsMoney do
-  let(:base_example) do
+
+  Given(:model_base_class_with_attr) {
     Class.new {
       extend EncapsulateAsMoney
-      attr_accessor :zero_amount, :nonzero_amount, :nil_amount
+      attr_accessor :attribute
     }
-  end
+  }
+  Given(:model_instance) { model_class.new }
+  Given!(:init_attr_value) { model_instance.instance_variable_set :@attribute, initial_attr_value }
 
-  let(:nil_destroying_example) do
-    Class.new(base_example) {
-      encapsulate_as_money :zero_amount, :nonzero_amount, :nil_amount
-     }
-  end
-
-  let(:nil_preserving_example) do
-    Class.new(base_example) {
-      encapsulate_as_money :zero_amount, :nonzero_amount, :nil_amount, :preserve_nil => true
+  describe "encapsulating the attribute as money" do
+    When(:model_class) {
+      Class.new(model_base_class_with_attr) {
+        encapsulate_as_money :attribute
+      }
     }
+
+    context "initial value is nil" do
+      Given(:initial_attr_value) { nil }
+      Then { model_instance.attribute == Money.new(0) }
+    end
+
+    context "initial value is 0" do
+      Given(:initial_attr_value) { 0 }
+      Then { model_instance.attribute == Money.new(0) }
+    end
+
+    context "initial value is 1" do
+      Given(:initial_attr_value) { 1 }
+      Then { model_instance.attribute == Money.new(1) }
+    end
   end
 
-  let(:nil_amount) { nil }
-  let(:zero_amount) { 0 }
-  let(:nonzero_amount) { 1_00 }
+  describe "encapsulating the attribute as money, preserving nil" do
+    When(:model_class) {
+      Class.new(model_base_class_with_attr) {
+        encapsulate_as_money :attribute, :preserve_nil => true
+      }
+    }
 
-  before do
-    product.instance_variable_set(:@nil_amount, nil_amount)
-    product.instance_variable_set(:@zero_amount, zero_amount)
-    product.instance_variable_set(:@nonzero_amount, nonzero_amount)
-  end
+    context "initial value is nil" do
+      Given(:initial_attr_value) { nil }
+      Then { model_instance.attribute == nil }
+    end
 
-  context 'dont preserve nil values' do
-    let(:product) { nil_destroying_example.new }
+    context "initial value is 0" do
+      Given(:initial_attr_value) { 0 }
+      Then { model_instance.attribute == Money.new(0) }
+    end
 
-    # it 'casts non zero integer values to a money instance' do
-    Then { product.nonzero_amount == Money.new(1_00) }
-
-    # it 'casts zero integer values to a money instance' do
-    Then { product.zero_amount == Money.new(0) }
-
-    # it 'casts nil into a zero money instance' do
-    Then { product.nil_amount == Money.new(0) }
-  end
-
-  context 'preserve nil values' do
-    let(:product) { nil_preserving_example.new }
-
-    # it 'casts non zero integer values to a money instance' do
-    Then { product.nonzero_amount == Money.new(1_00) }
-
-    # it 'casts zero integer values to a money instance' do
-    Then { product.zero_amount == Money.new(0) }
-
-    # it 'preserves nil' do
-    Then { product.nil_amount == nil }
+    context "initial value is 1" do
+      Given(:initial_attr_value) { 1 }
+      Then { model_instance.attribute == Money.new(1) }
+    end
   end
 end
