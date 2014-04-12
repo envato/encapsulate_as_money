@@ -1,10 +1,9 @@
 require "encapsulate_as_money/version"
 require "money"
-require "active_support/core_ext/array/extract_options"
 
 module EncapsulateAsMoney
   def encapsulate_as_money(*fields)
-    options = fields.extract_options!
+    options = extract_options(fields)
     fields.each { |field| encapsulate_as_money!(field, options[:preserve_nil]) }
   end
 
@@ -20,7 +19,11 @@ private
     end
 
     define_method "#{field}=" do |money|
-      super(money.try(:cents))
+      super(money && money.cents)
     end
+  end
+
+  def extract_options(array)
+    array.last.is_a?(Hash) ? array.pop : {}
   end
 end
