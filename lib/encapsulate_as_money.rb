@@ -1,6 +1,6 @@
 require "encapsulate_as_money/version"
-require 'money'
-require 'active_support/core_ext/array/extract_options'
+require "money"
+require "active_support/core_ext/array/extract_options"
 
 module EncapsulateAsMoney
   def encapsulate_as_money(*fields)
