@@ -1,8 +1,14 @@
 require 'rubygems'
 require 'money'
+require 'active_support/core_ext/array/extract_options'
 
 def Money(cents)
-  cents.is_a?(String) ? cents.gsub(',', '').to_money : Money.new(cents)
+  if cents.is_a? String
+    warn "[DEPRECATION] Money(String) is deprecated. Please use Money.parse(String) instead. (#{Kernel.caller.first})"
+    Money.parse(cents.gsub(',', ''))
+  else
+    Money.new(cents)
+  end
 end
 
 class Money
@@ -14,18 +20,23 @@ end
 
 module EncapsulateAsMoney
   def encapsulate_as_money(*fields)
-    fields.each { |field| encapsualte_as_money!(field) }
+    options = fields.extract_options!
+    fields.each { |field| encapsulate_as_money!(field, options[:preserve_nil]) }
   end
 
   private
 
-  def encapsualte_as_money!(field)
-    define_method(field) do
-      Money((super() || 0))
+  def encapsulate_as_money!(field, preserve_nil)
+    define_method field do
+      if preserve_nil
+        Money.new(super()) if super()
+      else
+        Money.new(super() || 0)
+      end
     end
 
-    define_method("#{field}=") do |money|
-      super(money.cents)
+    define_method "#{field}=" do |money|
+      super(money.try(:cents))
     end
   end
 end
