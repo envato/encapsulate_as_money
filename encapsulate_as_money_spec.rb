@@ -4,7 +4,7 @@ require 'spec_helper'
 describe EncapsulateAsMoney do
   let(:base_example) do
     Class.new {
-      include EncapsulateAsMoney
+      extend EncapsulateAsMoney
       attr_accessor :zero_amount, :nonzero_amount, :nil_amount
     }
   end
