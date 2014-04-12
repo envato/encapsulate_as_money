@@ -1,23 +1,7 @@
 require "bundler/gem_tasks"
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
+require "rspec/core/rake_task"
 
-desc 'Default: run unit tests.'
-task :default => :test
-
-desc 'Test the encapsulate_as_money plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
-
-desc 'Generate documentation for the encapsulate_as_money plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'EncapsulateAsMoney'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+task :default => :spec
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.verbose = false
 end
