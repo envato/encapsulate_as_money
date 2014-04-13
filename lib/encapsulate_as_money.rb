@@ -13,10 +13,12 @@ module EncapsulateAsMoney
 private
 
   def encapsulate_attribute_as_money(attribute, preserve_nil = true)
-    define_method attribute do
-      if preserve_nil
+    if preserve_nil
+      define_method attribute do
         Money.new(super()) if super()
-      else
+      end
+    else
+      define_method attribute do
         Money.new(super() || 0)
       end
     end
