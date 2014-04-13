@@ -6,8 +6,8 @@ require "encapsulate_as_money/version"
 Gem::Specification.new do |spec|
   spec.name          = "encapsulate_as_money"
   spec.version       = EncapsulateAsMoney::VERSION
-  spec.authors       = ["Orien Madgwick"]
-  spec.email         = ["_@orien.io"]
+  spec.authors       = ["Anthony Sellitti", "Orien Madgwick", "Keith Pitt", "Martin Jagusch", "Mark Turnley", "Pete Yandall"]
+  spec.email         = ["anthony.sellitti@envato.com", "_@orien.io", "me@keithpitt.com", "_@mj.io", "mark@envato.com", "pete@envato.com"]
   spec.summary       = "Represent Active Record model attributes as Money instances"
   spec.homepage      = "https://github.com/envato/encapsulate_as_money"
   spec.license       = "MIT"
