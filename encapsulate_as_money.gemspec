@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = EncapsulateAsMoney::VERSION
   spec.authors       = ["Anthony Sellitti", "Orien Madgwick", "Keith Pitt", "Martin Jagusch", "Mark Turnley", "Pete Yandall"]
   spec.email         = ["anthony.sellitti@envato.com", "_@orien.io", "me@keithpitt.com", "_@mj.io", "mark@envato.com", "pete@envato.com"]
-  spec.summary       = "Represent Active Record model attributes as Money instances"
+  spec.summary       = "Represent model attributes as Money instances"
   spec.homepage      = "https://github.com/envato/encapsulate_as_money"
   spec.license       = "MIT"
 
