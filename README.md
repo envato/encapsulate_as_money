@@ -13,17 +13,16 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install encapsulate_as_money
-
 ## Usage
-
-TODO: Write usage instructions here
 
 ### Rails
 Example goes here
 
+```ruby
+class MyModel < ActiveRecord::Base
+  encapsulate_as_money :amount
+end
+```
 
 ## Contributing
 
