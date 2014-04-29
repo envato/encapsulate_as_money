@@ -1,6 +1,10 @@
 # EncapsulateAsMoney
 
-TODO: Write a gem description
+Want your model attribute to be a [Money](https://github.com/RubyMoney/money)
+instance? EncapsulateAsMoney provides a simple way to get this done.
+
+## Rails
+Example goes here
 
 ## Installation
 
