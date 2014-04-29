@@ -3,9 +3,6 @@
 Want your model attribute to be a [Money](https://github.com/RubyMoney/money)
 instance? EncapsulateAsMoney provides a simple way to get this done.
 
-## Rails
-Example goes here
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,6 +20,10 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
+
+### Rails
+Example goes here
+
 
 ## Contributing
 
