@@ -35,7 +35,7 @@ Which is based on the database table:
 
 ```ruby
 create_table "my_models" do |table|
-  table.integer  "amount"
+  table.integer "amount"
 end
 ```
 
