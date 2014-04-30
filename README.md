@@ -51,12 +51,12 @@ This will create a row as such:
 | --:| ------:|
 |  1 |    500 |
 
-Note that the it represents the value as cents.
+Note the value is represented as cents.
 
 Once persisted we can find the value like:
 
 ```ruby
-MyModel.find_by_id(1).amount # 5.dollars
+MyModel.find_by_id(1).amount #=> 5.dollars
 ```
 
 Note that it uses the default Money currency.
