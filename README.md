@@ -16,13 +16,42 @@ And then execute:
 ## Usage
 
 ### Rails
-Example goes here
 
+Add the `encapsulate_as_money` method to the Active Record base class.
+```ruby
+ActiveRecord::Base.extend(EncapsulateAsMoney)
+```
+
+Now say you have the model:
 ```ruby
 class MyModel < ActiveRecord::Base
   encapsulate_as_money :amount
 end
 ```
+
+Which is based on the database table:
+```ruby
+create_table "my_models" do |table|
+  table.integer  "amount"
+end
+```
+
+Now we can create and save an instance like:
+```ruby
+MyModel.create!(amount: 5.dollars)
+```
+
+This will create a row as such:
+| id | amount |
+| --:| ------:|
+|  1 |    500 |
+Note that the it represents the value as cents.
+
+Once persisted we can find the value like:
+```ruby
+MyModel.find_by_id(1).amount # 5.dollars
+```
+Note that it takes the default Money currency.
 
 ## Contributing
 
