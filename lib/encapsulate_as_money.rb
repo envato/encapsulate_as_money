@@ -24,7 +24,7 @@ private
     end
 
     define_method "#{attribute}=" do |money|
-      super(money && money.cents)
+      super(money && money.fractional)
     end
   end
 
