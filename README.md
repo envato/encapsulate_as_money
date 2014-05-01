@@ -1,4 +1,5 @@
 # EncapsulateAsMoney
+[![Build Status](https://travis-ci.org/envato/encapsulate_as_money.svg?branch=master)](https://travis-ci.org/envato/encapsulate_as_money)
 
 Want your model attribute to be a [Money](https://github.com/RubyMoney/money)
 instance? EncapsulateAsMoney provides a simple way to get this done!
