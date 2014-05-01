@@ -1,4 +1,6 @@
 # EncapsulateAsMoney
+
+[![Gem Version](https://badge.fury.io/rb/encapsulate_as_money.svg)](http://badge.fury.io/rb/encapsulate_as_money)
 [![Build Status](https://travis-ci.org/envato/encapsulate_as_money.svg?branch=master)](https://travis-ci.org/envato/encapsulate_as_money)
 
 Want your model attribute to be a [Money](https://github.com/RubyMoney/money)
