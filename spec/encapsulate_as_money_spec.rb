@@ -53,6 +53,11 @@ describe EncapsulateAsMoney do
         When { model_instance.attribute = nil }
         Then { model_instance.instance_variable_get(:@attribute) == 0 }
       end
+
+      context "a value of NZD $1" do
+        When(:result) { model_instance.attribute = Money.new(1_00, :nzd) }
+        Then { expect(result).to have_failed(EncapsulateAsMoney::CurrencyMismatchError, /Must be a quantity of USD, received NZD/) }
+      end
     end
   end
 
@@ -97,6 +102,11 @@ describe EncapsulateAsMoney do
       context "a value of nil" do
         When { model_instance.attribute = nil }
         Then { model_instance.instance_variable_get(:@attribute).nil? }
+      end
+
+      context "a value of NZD $1" do
+        When(:result) { model_instance.attribute = Money.new(1_00, :nzd) }
+        Then { expect(result).to have_failed(EncapsulateAsMoney::CurrencyMismatchError, /Must be a quantity of USD, received NZD/) }
       end
     end
   end

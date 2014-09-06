@@ -4,17 +4,17 @@ module EncapsulateAsMoney
   class MoneyDefinition
     class << self
       def build(options = {})
-        options[:preserve_nil] ? preserving_nil_numeric_definition : non_preserving_nil_numeric_definition
+        options[:preserve_nil] ? preserving_nil_numeric_def : non_preserving_nil_numeric_def
       end
 
       private
 
-      def preserving_nil_numeric_definition
-        @preserving_nil_numeric_definition ||= PreservingNilNumericMoneyDefinition.new
+      def preserving_nil_numeric_def
+        @preserving_nil_numeric_def ||= PreservingNilNumericMoneyDefinition.new
       end
 
-      def non_preserving_nil_numeric_definition
-        @non_preserving_nil_numeric_definition ||= NonPreservingNilNumericMoneyDefinition.new
+      def non_preserving_nil_numeric_def
+        @non_preserving_nil_numeric_def ||= NonPreservingNilNumericMoneyDefinition.new
       end
     end
   end
