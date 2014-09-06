@@ -17,14 +17,19 @@ private
       define_method attribute do
         Money.new(super()) if super()
       end
+
+      define_method "#{attribute}=" do |money|
+        super(money && money.fractional)
+      end
     else
       define_method attribute do
         Money.new(super() || 0)
       end
-    end
 
-    define_method "#{attribute}=" do |money|
-      super(money && money.fractional)
+      define_method "#{attribute}=" do |money|
+        num = (money && money.fractional) || 0
+        super(num)
+      end
     end
   end
 

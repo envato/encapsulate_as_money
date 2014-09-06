@@ -10,7 +10,6 @@ describe EncapsulateAsMoney do
     }
   }
   Given(:model_instance) { model_class.new }
-  Given!(:init_attr_value) { model_instance.instance_variable_set :@attribute, initial_attr_value }
 
   describe "encapsulating the attribute as money" do
     When(:model_class) {
@@ -19,19 +18,41 @@ describe EncapsulateAsMoney do
       }
     }
 
-    context "initial value is nil" do
-      Given(:initial_attr_value) { nil }
-      Then { model_instance.attribute == Money.new(0) }
+    describe "reading" do
+      Given!(:init_attr_value) { model_instance.instance_variable_set :@attribute, initial_attr_value }
+
+      context "initial value is nil" do
+        Given(:initial_attr_value) { nil }
+        Then { model_instance.attribute == Money.zero }
+      end
+
+      context "initial value is 0" do
+        Given(:initial_attr_value) { 0 }
+        Then { model_instance.attribute == Money.zero }
+      end
+
+      context "initial value is 1" do
+        Given(:initial_attr_value) { 1 }
+        Then { model_instance.attribute == Money.new(1) }
+      end
     end
 
-    context "initial value is 0" do
-      Given(:initial_attr_value) { 0 }
-      Then { model_instance.attribute == Money.new(0) }
-    end
+    describe "writing" do
 
-    context "initial value is 1" do
-      Given(:initial_attr_value) { 1 }
-      Then { model_instance.attribute == Money.new(1) }
+      context "a value of $1" do
+        When { model_instance.attribute = Money.new(1_00) }
+        Then { model_instance.instance_variable_get(:@attribute) == 1_00 }
+      end
+
+      context "a value of $0" do
+        When { model_instance.attribute = Money.zero }
+        Then { model_instance.instance_variable_get(:@attribute) == 0 }
+      end
+
+      context "a value of nil" do
+        When { model_instance.attribute = nil }
+        Then { model_instance.instance_variable_get(:@attribute) == 0 }
+      end
     end
   end
 
@@ -42,19 +63,41 @@ describe EncapsulateAsMoney do
       }
     }
 
-    context "initial value is nil" do
-      Given(:initial_attr_value) { nil }
-      Then { model_instance.attribute == nil }
+    describe "reading" do
+      Given!(:init_attr_value) { model_instance.instance_variable_set :@attribute, initial_attr_value }
+
+      context "initial value is nil" do
+        Given(:initial_attr_value) { nil }
+        Then { model_instance.attribute == nil }
+      end
+
+      context "initial value is 0" do
+        Given(:initial_attr_value) { 0 }
+        Then { model_instance.attribute == Money.zero }
+      end
+
+      context "initial value is 1" do
+        Given(:initial_attr_value) { 1 }
+        Then { model_instance.attribute == Money.new(1) }
+      end
     end
 
-    context "initial value is 0" do
-      Given(:initial_attr_value) { 0 }
-      Then { model_instance.attribute == Money.new(0) }
-    end
+    describe "writing" do
 
-    context "initial value is 1" do
-      Given(:initial_attr_value) { 1 }
-      Then { model_instance.attribute == Money.new(1) }
+      context "a value of $1" do
+        When { model_instance.attribute = Money.new(1_00) }
+        Then { model_instance.instance_variable_get(:@attribute) == 1_00 }
+      end
+
+      context "a value of $0" do
+        When { model_instance.attribute = Money.zero }
+        Then { model_instance.instance_variable_get(:@attribute) == 0 }
+      end
+
+      context "a value of nil" do
+        When { model_instance.attribute = nil }
+        Then { model_instance.instance_variable_get(:@attribute).nil? }
+      end
     end
   end
 end
