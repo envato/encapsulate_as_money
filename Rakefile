@@ -1,12 +1,9 @@
 require "bundler/gem_tasks"
-require "rake/testtask"
+require 'rspec/core/rake_task'
 require "yard"
 
 task :default => :spec
 
-Rake::TestTask.new(:spec) do |t|
-  t.libs << "spec"
-  t.test_files = Dir.glob("spec/**/*_spec.rb")
-end
+RSpec::Core::RakeTask.new(:spec)
 
 YARD::Rake::YardocTask.new
