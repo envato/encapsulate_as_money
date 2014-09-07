@@ -17,9 +17,15 @@ module EncapsulateAsMoney
         @non_preserving_nil_numeric_def ||= NonPreservingNilNumericMoneyDefinition.new
       end
     end
+
+    def read(args = {})
+    end
+
+    def write(args = {})
+    end
   end
 
-  class PreservingNilNumericMoneyDefinition
+  class PreservingNilNumericMoneyDefinition < MoneyDefinition
     def read(args = {})
       Money.new(args[:value], args[:currency]) if args[:value]
     end
@@ -29,7 +35,7 @@ module EncapsulateAsMoney
     end
   end
 
-  class NonPreservingNilNumericMoneyDefinition
+  class NonPreservingNilNumericMoneyDefinition < MoneyDefinition
     def read(args = {})
       Money.new(args[:value] || 0, args[:currency])
     end
