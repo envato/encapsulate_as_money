@@ -155,4 +155,38 @@ describe EncapsulateAsMoney do
       end
     end
   end
+
+  describe "encapsulating the attribute as money, with a custom currency definition" do
+
+    class CustomCurrencyDef < EncapsulateAsMoney::CurrencyDefinition
+      def read(args)
+        :aud
+      end
+    end
+
+    When(:model_class) {
+      Class.new(model_base_class_with_attr) {
+        encapsulate_as_money :attribute, :currency_def => CustomCurrencyDef.new
+      }
+    }
+
+    describe "reading" do
+      Given!(:init_attr_value) { model_instance.instance_variable_set :@attribute, initial_attr_value }
+
+      context "initial value is nil" do
+        Given(:initial_attr_value) { nil }
+        Then { model_instance.attribute == Money.new(0, :aud) }
+      end
+
+      context "initial value is 0" do
+        Given(:initial_attr_value) { 0 }
+        Then { model_instance.attribute == Money.new(0, :aud) }
+      end
+
+      context "initial value is 1" do
+        Given(:initial_attr_value) { 1 }
+        Then { model_instance.attribute == Money.new(1, :aud) }
+      end
+    end
+  end
 end

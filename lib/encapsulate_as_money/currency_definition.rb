@@ -5,6 +5,7 @@ module EncapsulateAsMoney
   class CurrencyDefinition
     class << self
       def build(options = {})
+        return options[:currency_def] if options[:currency_def]
         options[:currency] ? StaticCurrencyDefinition.new(options[:currency]) : default_currency_def
       end
 
@@ -14,9 +15,15 @@ module EncapsulateAsMoney
         @default_currency_def ||= DefaultCurrencyDefinition.new
       end
     end
+
+    def read(args = {})
+    end
+
+    def write(args = {})
+    end
   end
 
-  class StaticCurrencyDefinition
+  class StaticCurrencyDefinition < CurrencyDefinition
     def initialize(currency)
       @currency = currency
     end
@@ -34,7 +41,7 @@ module EncapsulateAsMoney
     end
   end
 
-  class DefaultCurrencyDefinition
+  class DefaultCurrencyDefinition < CurrencyDefinition
     def read(args = {})
       Money.default_currency.id
     end
