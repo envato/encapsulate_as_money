@@ -12,10 +12,12 @@ class Price
   include ActiveModel::Validations
 
   encapsulate_as_money :amount
-  validates_inclusion_of :amount, in: Money.new(1)..Money.new(2)
+  validates_inclusion_of :amount, in: Money.new(1)..Money.new(2), allow_nil: true
+  validates_inclusion_of :qty, in: 1..2, allow_nil: true
 
-  def initialize(amount)
-    @amount = amount
+  def initialize(attributes = {})
+    @amount = attributes[:amount]
+    @qty = attributes[:qty]
   end
 
   def amount
@@ -24,5 +26,13 @@ class Price
 
   def amount=(amount)
     @amount = amount
+  end
+
+  def qty
+    @qty
+  end
+
+  def qty=(qty)
+    @qty = qty
   end
 end
