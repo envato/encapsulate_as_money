@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "ActiveModel integration", skip: !ENV['APPRAISAL_INITIALIZED'] do
+describe "ActiveModel integration", skip: !ENV['APPRAISAL_INITIALIZED'] && !ENV['TRAVIS'] do
   describe '.validates_inclusion_of' do
     it "validates money correctly" do
       expect(Price.new(amount: Money.new(0))).not_to be_valid
