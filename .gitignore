@@ -17,6 +17,7 @@ test/tmp
 test/version_tmp
 tmp
 *.bundle
+*.gemfile.lock
 *.so
 *.o
 *.a

@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "encapsulate_as_money/version"
+require "encapsulate_as_money/activemodel_integration"
 require "money"
 
 module EncapsulateAsMoney
