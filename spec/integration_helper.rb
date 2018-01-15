@@ -6,6 +6,7 @@ class Price
   case ActiveModel::VERSION::MAJOR
   when 3 then include ActiveModel::AttributeMethods
   when 4 then include ActiveModel::Model
+  when 5 then include ActiveModel::Model
   else raise NotImplementedError, ActiveModel::VERSION::MAJOR
   end
 
