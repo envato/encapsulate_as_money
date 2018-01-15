@@ -1,7 +1,7 @@
 begin
   require 'active_model'
 
-  if ActiveModel::VERSION::MAJOR == 4
+  if [4,5].include?(ActiveModel::VERSION::MAJOR)
     module ActiveModel::Validations::Clusivity
       private
 

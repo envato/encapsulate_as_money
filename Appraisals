@@ -5,3 +5,7 @@ end
 appraise 'rails-4_0' do
   gem 'activemodel', '4.0.13'
 end
+
+appraise 'rails-5_0' do
+  gem 'activemodel', '5.0.6'
+end
