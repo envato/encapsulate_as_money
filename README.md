@@ -1,7 +1,7 @@
 # EncapsulateAsMoney
 
 [![Gem Version](https://badge.fury.io/rb/encapsulate_as_money.svg)](http://badge.fury.io/rb/encapsulate_as_money)
-[![Build Status](https://travis-ci.org/envato/encapsulate_as_money.svg?branch=master)](https://travis-ci.org/envato/encapsulate_as_money)
+[![Build Status](https://github.com/envato/encapsulate_as_money/workflows/tests/badge.svg?branch=master)](https://github.com/envato/encapsulate_as_money/actions?query=branch%3Amaster+workflow%3Atests)
 
 Want your model attribute to be a [Money](https://github.com/RubyMoney/money)
 instance? EncapsulateAsMoney provides a simple way to get this done!
