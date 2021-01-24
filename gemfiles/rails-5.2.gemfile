@@ -1,0 +1,6 @@
+
+source "https://rubygems.org"
+
+gem "activemodel", "~> 5.2.4"
+
+gemspec path: "../"
